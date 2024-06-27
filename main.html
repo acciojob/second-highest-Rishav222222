@@ -8,19 +8,39 @@
 
 <body>	
 	<script>
-		function secondHighest(arr) {
-			//Write your code here
-			
-		}
+	function secondHighest(arr) {
+    // Handle edge cases
+    if (arr.length < 2) {
+        return -Infinity;
+    }
 
-		function Main() {
-			var n = prompt("Enter the number of elements");
-			var arr = [];
-			for (var i = 0; i < n; i++) {
-				arr[i] = prompt("Enter element " + (i+1));
-			}
-			alert(secondHighest(arr));
-		}
+    // Initialize first and second highest values
+    let firstHighest = -Infinity;
+    let secondHighest = -Infinity;
+
+    for (let num of arr) {
+        if (num > firstHighest) {
+            secondHighest = firstHighest;
+            firstHighest = num;
+        } else if (num > secondHighest && num < firstHighest) {
+            secondHighest = num;
+        }
+    }
+
+    // If the second highest is still -Infinity, it means all elements are the same or not found
+    return secondHighest === -Infinity ? -Infinity : secondHighest;
+}
+
+// Function to handle user input and call secondHighest
+function Main() {
+    var n = parseInt(prompt("Enter the number of elements"));
+    var arr = [];
+    for (var i = 0; i < n; i++) {
+        arr[i] = parseInt(prompt("Enter element " + (i + 1)));
+    }
+    alert(secondHighest(arr));  
+}
+		
 		Main();
 	</script>
 
